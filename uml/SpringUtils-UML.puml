@@ -1,0 +1,20 @@
+@startuml
+class com.example.demo.spring.ioc.SpringUtils {
+- {static} ConfigurableListableBeanFactory beanFactory
+- {static} ApplicationContext applicationContext
++ void postProcessBeanFactory(ConfigurableListableBeanFactory)
++ void setApplicationContext(ApplicationContext)
++ {static} T getBean(String)
++ {static} T getBean(Class<T>)
++ {static} boolean containsBean(String)
++ {static} boolean isSingleton(String)
++ {static} Class<?> getType(String)
++ {static} String[] getAliases(String)
++ {static} T getAopProxy(T)
++ {static} String[] getActiveProfiles()
+}
+
+
+org.springframework.beans.factory.config.BeanFactoryPostProcessor <|.. com.example.demo.spring.ioc.SpringUtils
+org.springframework.context.ApplicationContextAware <|.. com.example.demo.spring.ioc.SpringUtils
+@enduml
