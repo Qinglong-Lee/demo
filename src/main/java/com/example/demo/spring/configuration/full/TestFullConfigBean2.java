@@ -1,4 +1,4 @@
-package com.example.demo.spring.cofiguration.full;
+package com.example.demo.spring.configuration.full;
 
 public class TestFullConfigBean2 {
     public TestFullConfigBean testFullConfigBean;

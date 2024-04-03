@@ -1,4 +1,4 @@
-package com.example.demo.spring.cofiguration.lite;
+package com.example.demo.spring.configuration.lite;
 
 public class TestLiteConfigBean2 {
     public TestLiteConfigBean testLiteConfigBean;

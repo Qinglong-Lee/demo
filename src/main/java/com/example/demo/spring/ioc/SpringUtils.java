@@ -42,7 +42,8 @@ public final class SpringUtils implements BeanFactoryPostProcessor, ApplicationC
      */
     @SuppressWarnings("unchecked")
     public static <T> T getBean(String name) throws BeansException {
-        return (T) beanFactory.getBean(name);
+        return (T) applicationContext.getBean(name);
+//        return (T) beanFactory.getBean(name);
     }
 
     /**

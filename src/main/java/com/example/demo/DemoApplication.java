@@ -1,22 +1,17 @@
 package com.example.demo;
 
-import com.example.demo.spring.beanDefinition.ChildBean;
-import com.example.demo.spring.cofiguration.full.TestFullConfig;
-import com.example.demo.spring.cofiguration.full.TestFullConfigBean2;
-import com.example.demo.spring.cofiguration.lite.TestLiteConfigBean2;
+import com.example.demo.spring.aop.aspect.AspectBean;
+import com.example.demo.spring.aop.targetSrc.SpringAopTargetUtil;
+import com.example.demo.spring.aop.targetSrc.quickStart.CommonPoolBean;
+import com.example.demo.spring.aop.targetSrc.quickStart.PrototypeBean;
 import com.example.demo.spring.ioc.SpringUtils;
-import com.example.demo.spring.ioc.TestBean;
-import com.example.demo.spring.postProcessor.TestPostProcessorBean;
-import org.springframework.beans.factory.config.BeanDefinition;
-import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.ExitCodeGenerator;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.metrics.buffering.BufferingApplicationStartup;
+import org.springframework.cglib.core.DebuggingClassWriter;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.core.metrics.jfr.FlightRecorderApplicationStartup;
-
-import java.util.Arrays;
+//import org.springframework.jdbc.core.JdbcTemplate;
 
 @SpringBootApplication
 //如果要引用外部依赖并且想要自定扫描依赖中的配置，需要手动添加依赖的包路径，否则只会扫描当前包
@@ -24,8 +19,9 @@ import java.util.Arrays;
 //@ComponentScan(basePackages = "com.example.springbootstarter")
 public class DemoApplication {
 
-	public static void main(String[] args) {
-
+	public static void main(String[] args) throws Exception {
+		//导出CGLib生成的字节码对象
+		System.setProperty(DebuggingClassWriter.DEBUG_LOCATION_PROPERTY, "D:\\cglibProxyClass");
 		SpringApplication springApplication = new SpringApplication(DemoApplication.class);
 		//自定义应用上下文，即 bean 容器
 //		springApplication.setApplicationContextFactory(new CustomizeApplicationContext.Factory());
@@ -38,6 +34,47 @@ public class DemoApplication {
 //
 		ConfigurableApplicationContext context =
 				springApplication.run(args/*new String[]{"--name=ARG1", "ARG2"}*/);
+//		int exitCode = SpringApplication.exit(context, (ExitCodeGenerator) () -> 0);
+//		System.exit(exitCode);
+
+//		JdbcTemplate jdbcTemplate = (JdbcTemplate) context.getBeanFactory().getBean("jdbcTemplate");
+//		jdbcTemplate.queryForList("SELECT * FROM edu_course");
+
+//		停止容器
+//		context.stop();
+
+//		测试自定义targetSource
+//		PrototypeBean customProxy = (PrototypeBean) context.getBeanFactory().getBean("!prototypeBean");
+//		System.out.println((PrototypeBean)SpringAopTargetUtil.getTarget(customProxy));
+//		System.out.println((PrototypeBean)SpringAopTargetUtil.getTarget(customProxy));
+
+//		测试Spring AOP的CGLib
+//		AspectBean aspectBean = (AspectBean) context.getBeanFactory().getBean("aspectBean");
+//		aspectBean.testAspect1();
+
+//		测试AOP的默认targetSource
+//		AspectBean aspectBean = (AspectBean) context.getBeanFactory().getBean("aspectBean");
+//		SpringAopTargetUtil.getTarget(aspectBean);
+
+//		测试setter注入
+//		SetterA setterA = (SetterA)context.getBeanFactory().getBean("setterA");
+//		System.out.println(setterA.setterB);
+
+//		测试构造函数循环依赖
+//		CircularDependencyA bean = (CircularDependencyA)context.getBeanFactory().getBean("circularDependencyA");
+//		System.out.println(bean.circB);
+
+
+//		测试有参构造的单例bean
+//		SingletonBeanWithCtorParams bean = (SingletonBeanWithCtorParams)context.getBeanFactory().getBean("singletonBeanWithCtorParams");
+//		System.out.println(bean.param1 + "-" + bean.param2);
+
+//		测试循 Aware 接口
+//		AwareBean awareBean = (AwareBean)context.getBeanFactory().getBean("awareBean");
+//		System.out.println(awareBean.beanName);
+
+//		测试循环依赖
+//		context.getBeanFactory().getBean("beanA");
 
 //		如果一个bean的定义有继承关系，则会将子类和父类的BeanDefinition合并为MergedBeanDefinition
 //		java类定义的bean，propertyValues中没有值？？？？那属性放在哪的？？？
@@ -49,8 +86,8 @@ public class DemoApplication {
 //		BeanDefinition sam = context.getBeanFactory().getBeanDefinition("sam");
 //		sam.getPropertyValues().stream().forEach(System.out::println);
 //		BeanDefinition mergedSam = context.getBeanFactory().getMergedBeanDefinition("sam");
-//		mergedSam.getPropertyValues().stream().forEach(System.out::println);
-		//		System.out.println("===================================================");
+//		mergedSam.getPropertyValues().stream().forEach(System.out::println)
+// 		System.out.println("===================================================");
 //		BeanDefinition merged = context.getBeanFactory().getMergedBeanDefinition("childBean");
 //		System.out.println(((ChildBean)context.getBeanFactory().getBean("childBean")).parent);
 

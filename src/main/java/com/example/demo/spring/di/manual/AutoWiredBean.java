@@ -1,15 +1,13 @@
-package com.example.demo.spring.circleReference;
+package com.example.demo.spring.di.manual;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
-@Lazy
-@Component
-public class BeanA {
-    @Autowired
-    public BeanB beanB;
 
-    public void a() {
-        beanB.b();
-    }
+@Component
+public class AutoWiredBean {
+    @Lazy
+    @Autowired
+    public ManualLoadBean manualLoadBean;
 }
+
