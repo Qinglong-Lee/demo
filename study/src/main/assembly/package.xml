@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.0
+                    http://maven.apache.org/xsd/assembly-1.1.0.xsd">
+    <id>all-hook</id>
+    <formats>
+        <!--打成一个 zip 包，将所有外部依赖和当前项目的 jar 包放在一起，并配置启动脚本-->
+        <!--<format>zip</format>-->
+
+        <!--打成一个 jar 包，是 class 包还是依赖包还是可执行包取决于下面对依赖的配置-->
+        <format>jar</format>
+    </formats>
+    <includeBaseDirectory>false</includeBaseDirectory>
+
+    <!--这里就是项目本身打包-->
+    <fileSets>
+        <fileSet>
+            <directory>${project.build.directory}/classes</directory>
+            <outputDirectory>/</outputDirectory>
+        </fileSet>
+    </fileSets>
+    <!--这里就是项目本身打包-->
+
+    <!--这里就是依赖的那些jar包-->
+    <dependencySets>
+        <dependencySet>
+            <outputDirectory>/</outputDirectory>
+            <!--是否将当前项目的代码打包成 jar 包，
+            false 就会将项目代码以 class 文件形式打包，而不生成额外的一个项目 jar包
+            true 就会生成项目的 class 和 jar 包
+            一般打成 zip 包就会将项目代码也打成 jar 包和外部依赖放一起-->
+            <useProjectArtifact>false</useProjectArtifact>
+            <!--将所有外部依赖的 jar 包解压成 class，默认为 false，即直接将外部依赖的 jar 包放到包中-->
+            <!--<unpack>true</unpack>-->
+            <scope>runtime</scope>
+        </dependencySet>
+    </dependencySets>
+    <!--这里就是依赖的那些jar包-->
+
+</assembly>
