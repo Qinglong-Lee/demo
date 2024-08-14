@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.FutureTask;
 
 import static java.lang.Thread.sleep;
 
@@ -13,10 +14,10 @@ public class FutureTaskTest {
     //    wait for finish in main thread
     public static void main(String[] args) {
         System.out.println(Thread.currentThread().getName() + " started!");
-        List<java.util.concurrent.FutureTask<Integer>> futureTaskList = new ArrayList<>();
+        List<FutureTask<Integer>> futureTaskList = new ArrayList<>();
 
         for (int i = 0; i < 3; i++) {
-            java.util.concurrent.FutureTask<Integer> futureTask = new java.util.concurrent.FutureTask<>(new Callable<Integer>() {
+            FutureTask<Integer> futureTask = new FutureTask<>(new Callable<Integer>() {
                 @Override
                 public Integer call() {
                     try {

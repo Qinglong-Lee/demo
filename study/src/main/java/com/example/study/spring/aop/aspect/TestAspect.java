@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class TestAspect {
 
-    @Pointcut("execution(* com.example.demo.spring.aop.aspect.AspectBean.*(..))")
+    @Pointcut("execution(* com.example.study.spring.aop.aspect.AspectBean.*(..))")
     public void webLoggingPointcut() {
         // Method is empty as this is just a Pointcut, the implementations are in the advices.
     }
