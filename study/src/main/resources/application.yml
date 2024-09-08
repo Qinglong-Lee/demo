@@ -1,8 +1,8 @@
 server:
   port: 8080
-#Spring actuator指标监控
+#Spring actuator 指标监控
 #配置需要开放的指标信息
-#startup是BufferingApplicationStartup提供的指标
+#startup是 BufferingApplicationStartup 提供的指标
 management:
     endpoints:
         web:

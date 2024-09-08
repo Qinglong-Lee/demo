@@ -1,4 +1,4 @@
-package org.example.practice;
+package org.example.practice.v1;
 
 import java.sql.Array;
 import java.util.ArrayList;
@@ -16,7 +16,10 @@ public class FutureTest {
                     throw new RuntimeException(e);
                 }
                 System.out.println(Thread.currentThread().getName() + " done!");
-            }, null);
+//                return "Success!";
+            }, "Success!");
+//            result 参数用于为 runnable 的 task 返回一个结果，因为 runnable 没有返回值
+//            作用同 callable 接口中的返回值
 
             new Thread(futureTask).start();
 

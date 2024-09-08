@@ -1,4 +1,4 @@
-package org.example.practice;
+package org.example.practice.v1;
 
 import java.io.*;
 import java.util.Scanner;

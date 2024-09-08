@@ -1,4 +1,4 @@
-package org.example.practice;
+package org.example.practice.v1;
 
 import java.util.*;
 import java.util.concurrent.PriorityBlockingQueue;

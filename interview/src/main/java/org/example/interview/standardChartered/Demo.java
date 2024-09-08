@@ -1,4 +1,4 @@
-package org.example.interview.standartChartered;
+package org.example.interview.standardChartered;
 
 public class Demo {
     public static void main(String[] args) {
