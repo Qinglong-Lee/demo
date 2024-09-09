@@ -24,6 +24,9 @@ import java.util.concurrent.LinkedBlockingQueue;
  *  而相比之下 ArrayList 就没有这个又是，因为每次元素操作都还是会导致元素的移动
  * 瓶颈是：
  * 【元素的遍历（随机元素操作都会涉及到元素遍历）】
+ *
+ * 另外，对于 LinkedList，利用迭代器遍历比 for 循环遍历性能高很多，因为 for 循环遍历每次循环都要用 get(i) 获取元素，而 get 方法会从头遍历链表
+ * 对于 ArrayList 两者无区别，因为 ArrayList 的 get 方法复杂度为 O(1)
  */
 public class TestList {
     public static void main(String[] args) {
@@ -69,7 +72,6 @@ public class TestList {
         start = System.currentTimeMillis();
         arrayList.listIterator().add(2);
         System.out.println("ArrayList listIterator().add 耗时：" + (System.currentTimeMillis()-start));
-
 
     }
 }
