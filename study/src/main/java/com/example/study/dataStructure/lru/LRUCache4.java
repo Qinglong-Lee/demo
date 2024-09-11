@@ -2,11 +2,21 @@ package com.example.study.dataStructure.lru;
 
 import java.util.HashMap;
 
+/**
+ * 【最久未使用】缓存，Least Recently Used Cache，仅以访问时间为维度
+ * 实现逻辑：定义一个键值对缓存，容量大小固定，put 的时候如果容量已满则【驱逐最久未使用的 key】。get 和 put 都视为对某个 key 的访问
+ * 实现思想：
+ * 1.键值对存储首选 HashMap
+ * 2.get 和 put 操作时都需要记录下使用情况。首先想到的是将每个访问过的 key 记录在列表，按使用时间排序，但是排序的时间复杂度为 O(n)
+ * 3.双向链表可以在定位到某个节点的前提下以 O(1) 的复杂度替换当前节点到链头或者链尾
+ * 4.HashMap 的 value 可以作为双向链表的节点，将所有 value 用双向链表连接，get 方法可以直接定位到链表节点，然后就可以直接交换节点到链尾
+ * 5.链尾节点总是【最近访问】，链头节点总是【最久未访问】，驱逐的总是链头节点
+ * 6.缓存类要记录下链表的【头结点】和【尾节点】，并不断更新
+ * 7.由于缓存容量固定，为了避免 HashMap 不必要的自动扩容，负载因子设为 1
+ */
 public class LRUCache4 {
     private HashMap<Object, Node> map;
-
     private Node head, tail;
-
     private int capacity;
 
     public LRUCache4(int capacity) {

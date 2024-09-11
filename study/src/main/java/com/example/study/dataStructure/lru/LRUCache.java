@@ -1,13 +1,22 @@
 package com.example.study.dataStructure.lru;
 
-
 import lombok.val;
-
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
+/**
+ * 【最久未使用】缓存，Least Recently Used Cache，仅以访问时间为维度
+ * 实现逻辑：定义一个键值对缓存，容量大小固定，put 的时候如果容量已满则【驱逐最久未使用的 key】。get 和 put 都视为对某个 key 的访问
+ * 实现思想：LinkedHashMap insertOrder + 手动节点移动
+ * 1.键值对存储首选 HashMap，但是普通的 HashMap 无法记录使用情况
+ * 2.LinkedHashMap 继承自 HashMap，改写了 HashMap 的 Entry，将所有 Entry 使用双向链表连接，实现了【插入顺序】
+ * 3.每次 put 都会将新的 Entry 加到链尾
+ * 4.可以利用此特性手动实现【最近访问节点到链尾的移动】：先删除节点，再从新添加
+ * 5.驱逐的是头节点，即 keySet 中第一个 key，因为 LinkedHashMap 是默认记录【插入顺序】的，所以 keySet 的迭代器也是有序的
+ * 6.由于缓存容量固定，为了避免 HashMap 不必要的自动扩容，负载因子设为 1
+ */
 public class LRUCache {
     private HashMap<Integer, Integer> map;
     private int capacity;
