@@ -1,4 +1,4 @@
-package org.example.practice.leetcode.ArrayElementRemove27;
+package org.example.practice.leetcode.arrayElementRemove27;
 
 import java.util.Arrays;
 

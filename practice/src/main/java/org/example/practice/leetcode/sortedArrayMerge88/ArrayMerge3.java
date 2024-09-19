@@ -1,4 +1,4 @@
-package org.example.practice.leetcode.SortedArrayMerge88;
+package org.example.practice.leetcode.sortedArrayMerge88;
 
 import java.util.Arrays;
 
