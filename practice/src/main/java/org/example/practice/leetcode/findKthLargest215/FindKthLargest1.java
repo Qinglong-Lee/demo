@@ -1,5 +1,13 @@
 package org.example.practice.leetcode.findKthLargest215;
 
+/**
+ * 找出数组中第 k 大的数
+ * 思路：【二叉排序树】
+ *
+ * 定义一个二叉排序树
+ * 将数组转换为数形结构
+ * 然后【中序遍历】树，按【右，根，左】顺序
+ */
 public class FindKthLargest1 {
     private int k, count, result;
 
