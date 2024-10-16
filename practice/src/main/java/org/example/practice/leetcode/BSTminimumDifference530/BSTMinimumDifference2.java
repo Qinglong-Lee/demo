@@ -25,21 +25,22 @@ public class BSTMinimumDifference2 {
 
         while (cur != null) {
             TreeNode mostRight = cur.left;
-
+//            如果有左子树
             if (mostRight != null) {
+//                找到【左节点的最右节点】，排除【辅助链】，即遍历过程中加的链
                 while (mostRight.right != null && mostRight.right != cur) {
                     mostRight = mostRight.right;
                 }
-
+//                第一次遍历到【左节点的最右节点】，添加【辅助链】，继续向左遍历
                 if (mostRight.right != cur) {
                     mostRight.right = cur;
                     cur = cur.left;
-                } else {
+                } else { // 第二次遍历到【左节点的最右节点】，代表着此次遍历是【回溯之后的遍历】，清除【辅助链】，向右继续遍历
                     updateMinAndPre(cur);
                     mostRight.right = null;
                     cur = cur.right;
                 }
-            } else {
+            } else { // 如果没有左子树，则向右遍历，
                 updateMinAndPre(cur);
                 cur = cur.right;
             }
